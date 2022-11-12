@@ -3,9 +3,7 @@ let request = require("axios")
 
 
 const pagosget = ()=>{
-    
     return pagos
-
 }
 const pagosSet = (pago)=>{
     if (pago.estado === "Aprobado") {

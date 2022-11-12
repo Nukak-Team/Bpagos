@@ -10,12 +10,12 @@ const port = 8088
 app.use(cors())
 app.use(body_parser.json())
 
-const patName = "pagos/"
+const patName = "/pagos"
 
 app.get(patName,
     (req, res) => {
         console.log("Recibimos peticion");
-        console.log(req);
+        //console.log(req);
 
         res.send(pagoService.pagosgetExport())
     })
@@ -59,7 +59,7 @@ app.listen(port,
 })
 
 // para ApiCarrito
-// app.get(patName+"/pendientes/idcliente"){
+// app.get(patName+"/pendientes/idCliente"){
 //     (req, res) => {
 //         console.log("Recibimos Peticion");
 //         console.log(req);
