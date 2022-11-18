@@ -10,10 +10,10 @@ const port = 8088
 app.use(cors())
 app.use(body_parser.json())
 
-const patName = "/pagos"
+const pathName = "/pagos"
 
 //******************* GET *******************
-app.get(patName,
+app.get(pathName,
     async (req, res) => {
         console.log("Recibimos peticion");
         console.log(req.query.idClient);
@@ -30,7 +30,7 @@ app.get(pathName+"/pendientes/idCliente",
 )
 
 //******************* POST *******************
-app.post(patName,
+app.post(pathName,
     (req, res) => {
         console.log("Post: Recibimos las peticion");
         console.log(req.body);
@@ -40,7 +40,7 @@ app.post(patName,
 )
 
 //******************* DELETE *******************
-app.delete(patName,
+app.delete(pathName,
     (req, res) => {
         console.log("Delete: Recibimos las peticion");
         let id = req.query.id
@@ -51,14 +51,14 @@ app.delete(patName,
 )
 
 //******************* PUT *******************
-app.put(patName,
+app.put(pathName,
     (req, res) => {
         console.log("Put: Recibimos las peticion");
         res.send("Finaliza")
     }
 )
 
-app.path(patName,
+app.path(pathName,
     (req, res) => {
         console.log("path: Recibimos las peticion");
         console.log(req.body);
