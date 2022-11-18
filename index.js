@@ -12,51 +12,65 @@ app.use(body_parser.json())
 
 const patName = "/pagos"
 
+//******************* GET *******************
 app.get(patName,
-    (req, res) => {
+    async (req, res) => {
         console.log("Recibimos peticion");
+        console.log(req.query.idClient);
+        res.send(await pagoService.pagosGetExport(req.query.idClient))
+    }
+)
+
+app.get(pathName+"/pendientes/idCliente", 
+    (req, res)=>{
+        console.log("Se recibe la petición de get");
         //console.log(req);
+        res.send(pagoServices.pagosGetExport())
+    }
+)
 
-        res.send(pagoService.pagosgetExport())
-    })
-
+//******************* POST *******************
 app.post(patName,
     (req, res) => {
         console.log("Post: Recibimos las peticion");
         console.log(req.body);
         let pagos = pagoService.pagosSetExport(req.body)
         res.send({"Mensaje" : "pago Guardado ","pagos":pagos})
-    })
+    }
+)
 
-    
+//******************* DELETE *******************
 app.delete(patName,
     (req, res) => {
         console.log("Delete: Recibimos las peticion");
-        console.log(req.body);
-        console.log("Finaliza Delete");
-        res.send("Finaliza")
-})
+        let id = req.query.id
+        console.log(id);
+        let pagos = pagoServices.pagosDeleteExport(id)
+        res.send({"mensaje":"Pago eliminado","pago":pagos})
+    }
+)
 
+//******************* PUT *******************
 app.put(patName,
     (req, res) => {
         console.log("Put: Recibimos las peticion");
-        console.log(req.body);
-        console.log("Finaliza Put");
         res.send("Finaliza")
-})
+    }
+)
 
 app.path(patName,
     (req, res) => {
         console.log("path: Recibimos las peticion");
         console.log(req.body);
-        console.log("Finaliza path");
         res.send("Finaliza")
-})
+    }
+)
 
 app.listen(port,
     () => {
         console.log("Subio el app pago en el puerto " + port);
-})
+    }
+)
 
 // para ApiCarrito
 // app.get(patName+"/pendientes/idCliente"){

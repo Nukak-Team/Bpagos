@@ -1,3 +1,31 @@
 [
-    
+    {
+        "mensaje": "Producto guardado",
+        "Producto": [
+            {
+                "idProducto": {
+                    "_id": "ILLO5",
+                    "Marca": "Proto",
+                    "Nombre": "Martillo",
+                    "Precio": 29900,
+                    "Categoria": "Manuales",
+                    "Descripcion": "Herramientas de Golpe Martillo de Bola 16 oz Peso Cabeza (454 g). Cabeza completamente pul_ida.\nLa cabeza del martillo está fija con 2 cuñas para más durabil_idad.\nMango 25% más largo en los tamaños 16-40 ozs para mejor equilibrio y control. ",
+                    "Stock": 50
+                },
+                "idCliente": "1",
+                "Stock": [
+                    {
+                        "Stock": 1
+                    }
+                ],
+                "Cliente": {
+                    "_id":"2",
+                    "nombre":"Juanita",
+                    "email":"juanita@gmail.com",
+                    "rol":"User"
+                },
+                "Mensaje": "Vendido"
+            }
+        ]
+    }
 ]

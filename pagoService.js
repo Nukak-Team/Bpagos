@@ -1,21 +1,51 @@
-let pagos = require("./pagos.json")
+const getMongo = require("./mongodb.js")
 let request = require("axios")
 
+//******************* Conexiones *******************
 
-const pagosget = ()=>{
-    return pagos
+async function getConexiones() {
+    const nameDb = "FerreteriaNukak"
+    const client = await getMongo.getClientnExport(nameDb)
+    const collection = await getMongo.getCollectionExport(client, nameDb)
+    return { collection, client }
 }
-const pagosSet = (pago)=>{
+
+//******************* GET *******************
+
+const pagosGet = async (idClient) => {
+    const {collection, client } = await getConexiones()
+    const pagos = collection.find({"idclient":idClient})
+    const pagosList = await pagos.toArray()
+    await getMongo.closeClientExport(client)
+    return pagosList
+}
+
+//******************* SET *******************
+
+const pagosSet = async (pago)=>{
+    const {collection, client } = await getConexiones()
     if (pago.estado === "Aprobado") {
         const carrito = request.patch(
             "localhost:8093/carrito/estado",
-            {"idcarrito":pago.idcarrito,"estadoCarrito":"Confirmado"}  
+            {"idCarrito":pago.idCarrito,"estadoCarrito":"Confirmado"}  
         ).then(
             console.log("PAGO CONFIRMADO")
-        )            
+        )
+        .catch(
+            (error)=>{
+                console.log("ERROR EN EL PAGO DE ESTADO")
+                console.log(error)
+            }
+        )
     }
-    pagos.push(pago)
-    return pagos
+    
+    await collection.insertOne(pago).then(
+        (resp)=>{
+            console.log("PAGO REGISTRADO")
+        }
+    )
+    await getMongo.closeClientExport(client)
+    return pago
 }
 
 const pagosDelete = (id)=>{
@@ -24,6 +54,6 @@ const pagosDelete = (id)=>{
 
 }
 
-module.exports.pagosgetExport = pagosget;
+module.exports.pagosGetExport = pagosGet;
 module.exports.pagosSetExport = pagosSet;
 module.exports.pagosDeleteExport = pagosDelete;
