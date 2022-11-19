@@ -83,13 +83,6 @@ app.listen(port,
 // }
 
 //Para CarritoServices.js
-// app.patch(patName+"/carrito/estado",
-//     (req, res) => {
-//         console.log("patch CarritoEstado: Recibimos las peticion");
-//         console.log(req.body);
-//         res.send(carritoServices.setEstadoCarritoExport(req.body))
-//     })
-
 // const setEstadoCarritoExport = (carritoPago) =>{
 //     for (let i = 0; i < carrito.length; i++) {
 //         if (carrito[i].id === carritoPago.idcarrito) {

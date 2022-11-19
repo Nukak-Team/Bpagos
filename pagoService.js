@@ -27,7 +27,7 @@ const pagosSet = async (pago)=>{
     if (pago.estado === "Aprobado") {
         const carrito = request.patch(
             "localhost:8093/carrito/estado",
-            {"idCarrito":pago.idCarrito,"estadoCarrito":"Confirmado"}  
+            {"idCarrito":pago.idCarrito,"estadoCarrito":"Confirmado"}
         ).then(
             console.log("PAGO CONFIRMADO")
         )
